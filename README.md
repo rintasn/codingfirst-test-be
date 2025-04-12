@@ -1,94 +1,94 @@
-# Sistem Manajemen Preferensi Pengguna
+# User Preferences Management System
 
-Sistem ini merupakan aplikasi manajemen preferensi pengguna yang memungkinkan pengguna untuk menyesuaikan pengalaman aplikasi mereka dengan mudah melalui antarmuka web atau perintah bahasa natural menggunakan Claude Desktop.
+This system is a user preferences management application that allows users to customize their application experience easily through a web interface or natural language commands using Claude Desktop.
 
 ## Tech Stack
 
 ### Backend
-- **Bahasa**: Golang
-- **Framework/Library**:
-  - `github.com/gorilla/mux` - Router HTTP
-  - `github.com/rs/cors` - Middleware CORS
-  - `github.com/xuri/excelize/v2` - Manipulasi Excel (untuk keperluan ekspor/impor)
-  - `gorm.io/driver/postgres` - Driver PostgreSQL untuk GORM
-  - `gorm.io/gorm` - ORM untuk Golang
-  - `golang.org/x/crypto/bcrypt` - Enkripsi password
-  - `github.com/golang-jwt/jwt/v4` - Implementasi JSON Web Token
-  - `github.com/joho/godotenv` - Pembacaan file .env
+- **Language**: Golang
+- **Framework/Libraries**:
+  - `github.com/gorilla/mux` - HTTP Router
+  - `github.com/rs/cors` - CORS Middleware
+  - `github.com/xuri/excelize/v2` - Excel manipulation (for export/import purposes)
+  - `gorm.io/driver/postgres` - PostgreSQL Driver for GORM
+  - `gorm.io/gorm` - ORM for Golang
+  - `golang.org/x/crypto/bcrypt` - Password encryption
+  - `github.com/golang-jwt/jwt/v4` - JSON Web Token implementation
+  - `github.com/joho/godotenv` - .env file reader
 
 ### Frontend
-- **Framework**: Next.js 15
-- **Bahasa**: TypeScript
+- **Framework**: Next.js 14
+- **Language**: TypeScript
 - **Styling**:
   - Tailwind CSS - Utility-first CSS framework
-  - Shadcn UI - Komponen UI berbasis Tailwind
+  - Shadcn UI - Tailwind-based UI components
 - **State Management**:
   - React Context API
-- **Form & Validasi**:
+- **Form & Validation**:
   - React Hook Form
   - Zod
 
 ### Database
-- PostgreSQL - Database relasional untuk penyimpanan data pengguna dan preferensi
+- PostgreSQL - Relational database for user data and preferences storage
 
-## Fitur Utama
+## Main Features
 
-### 1. Autentikasi Pengguna
-- Registrasi pengguna baru
-- Login dengan JWT (JSON Web Token)
-- Proteksi endpoint yang memerlukan autentikasi
-- Enkripsi password dengan bcrypt
+### 1. User Authentication
+- New user registration
+- Login with JWT (JSON Web Token)
+- Protection of endpoints requiring authentication
+- Password encryption with bcrypt
 
-### 2. Manajemen Preferensi
-- Pengaturan tema (terang/gelap)
-- Pemilihan bahasa (Inggris, Spanyol, Indonesia)
-- Pengaturan notifikasi (aktif/nonaktif)
-- Penyimpanan preferensi di database
+### 2. Preferences Management
+- Theme settings (light/dark)
+- Language selection (English, Spanish, Indonesian)
+- Notification settings (on/off)
+- Preferences storage in database
 
 ### 3. Context Management Protocol (MCP)
-- Pemisahan data pengguna dan preferensi
-- Penerapan preferensi secara global di aplikasi
-- Perubahan real-time tanpa refresh halaman
+- Separation of user data and preferences
+- Global application of preferences
+- Real-time changes without page refresh
 
 ### 4. Claude Desktop Integration
-- Antarmuka chat untuk berinteraksi dengan AI
-- Pemrosesan bahasa natural untuk mengubah preferensi
-- Umpan balik instan saat preferensi diubah
-- Saran perintah untuk pengguna baru
+- Chat interface for AI interaction
+- Natural language processing to change preferences
+- Instant feedback when preferences are updated
+- Command suggestions for new users
 
-### 5. Antarmuka Pengguna yang Responsif
-- Dashboard untuk melihat preferensi saat ini
-- Halaman pengaturan untuk modifikasi manual
-- Dukungan penuh untuk tema terang/gelap
-- Desain responsif untuk berbagai ukuran perangkat
+### 5. Responsive User Interface
+- Dashboard to view current preferences
+- Settings page for manual modification
+- Full support for light/dark themes
+- Responsive design for various device sizes
 
-### 6. Persistensi Antar Sesi
-- Preferensi disimpan di database
-- Preferensi dimuat secara otomatis saat login
-- Konsistensi pengalaman pengguna antar perangkat
+### 6. Cross-Session Persistence
+- Preferences stored in database
+- Preferences automatically loaded at login
+- Consistent user experience across devices
 
-## Alur Kerja Sistem
+## System Workflow
 
-1. **Registrasi & Login**:
-   - Pengguna mendaftar dengan username, email, dan password
-   - Setelah login, JWT token dibuat dan preferensi default diterapkan
+1. **Registration & Login**:
+   - Users register with username, email, and password
+   - After login, JWT token is created and default preferences are applied
 
-2. **Penggunaan Preferensi**:
-   - Preferensi dimuat sebagai konteks dan diterapkan ke seluruh aplikasi
-   - Tema, bahasa, dan pengaturan notifikasi diaplikasikan secara real-time
+2. **Preferences Usage**:
+   - Preferences are loaded as context and applied throughout the application
+   - Theme, language, and notification settings are applied in real-time
 
-3. **Modifikasi Preferensi**:
-   - Via halaman pengaturan dengan form UI
-   - Via Claude Desktop dengan perintah bahasa natural
-   - Perubahan disimpan ke database dan diterapkan segera
+3. **Preferences Modification**:
+   - Via settings page with UI form
+   - Via Claude Desktop with natural language commands
+   - Changes are saved to database and applied immediately
 
-4. **Persistensi**:
-   - Preferensi bertahan di berbagai sesi
-   - Konsistensi pengalaman pengguna antar login
+4. **Persistence**:
+   - Preferences persist across various sessions
+   - Consistent user experience between logins
 
-## Pengelolaan Database
+## Database Management
 
-### Skema Database dengan GORM
+### Database Schema with GORM
 
 ```go
 // User Model
@@ -117,49 +117,49 @@ type UserPreferences struct {
 
 ## API Endpoints
 
-### Autentikasi
-- `POST /api/auth/register` - Pendaftaran pengguna baru
-- `POST /api/auth/login` - Login pengguna
+### Authentication
+- `POST /api/auth/register` - New user registration
+- `POST /api/auth/login` - User login
 
-### Preferensi
-- `GET /api/preferences` - Mengambil preferensi pengguna
-- `POST /api/preferences` - Memperbarui preferensi pengguna
+### Preferences
+- `GET /api/preferences` - Retrieve user preferences
+- `POST /api/preferences` - Update user preferences
 
 ### Claude Desktop
-- `POST /api/claude` - Mengirim pesan ke Claude dan menerima respons
+- `POST /api/claude` - Send message to Claude and receive response
 
-### Pengguna
-- `GET /api/user` - Mengambil data pengguna dengan preferensi
+### User
+- `GET /api/user` - Retrieve user data with preferences
 
-## Contoh Penggunaan Claude Desktop
+## Claude Desktop Usage Examples
 
-Claude Desktop dapat memahami berbagai perintah bahasa natural, seperti:
+Claude Desktop can understand various natural language commands, such as:
 
-- "Ubah tema ke mode gelap"
-- "Ganti bahasa ke bahasa Indonesia"
-- "Matikan notifikasi"
-- "Apa pengaturan saya saat ini?"
-- "Aktifkan notifikasi"
-- "Kembali ke tema terang"
+- "Change theme to dark mode"
+- "Switch language to Indonesian"
+- "Turn off notifications"
+- "What are my current settings?"
+- "Enable notifications"
+- "Switch back to light theme"
 
-## Instalasi dan Penggunaan
+## Installation and Usage
 
 ### Backend
-1. Clone repository
+1. Clone the repository
 2. Install dependencies: `go mod tidy`
-3. Buat file `.env` dengan konfigurasi database dan JWT
-4. Jalankan aplikasi: `go run main.go`
+3. Create `.env` file with database and JWT configuration
+4. Run the application: `go run main.go`
 
 ### Frontend
-1. Clone repository frontend
+1. Clone the frontend repository
 2. Install dependencies: `npm install`
-3. Buat file `.env.local` dengan URL API backend
-4. Jalankan aplikasi: `npm run dev`
+3. Create `.env.local` file with backend API URL
+4. Run the application: `npm run dev`
 
-## Kontribusi
+## Contribution
 
-Kontribusi dan saran untuk perbaikan sangat diterima. Silakan buat issue atau pull request untuk berkontribusi pada proyek ini.
+Contributions and suggestions for improvements are welcome. Please create an issue or pull request to contribute to this project.
 
-## Lisensi
+## License
 
 [MIT License](LICENSE)
